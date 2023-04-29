@@ -1,4 +1,5 @@
 #include "k-means.h"
+
 //int main(int argc, char *argv[])
 //{
 //    QApplication a(argc, argv);
@@ -111,7 +112,16 @@ vector<vector<double>> kMeans_init_centroids(vector<vector<double>> X, int K) {
 }
 void assignToClusters(vector<vector<double>> &vec,vector<int> labels,vector<vector<double>> centroids){
     for(int i=0;i<(int)vec.size();i++){
-        vec[i] = centroids[labels[i]];
+        vector<double> centroid = centroids[labels[i]];
+
+        //convert the luv center to rgb
+        int r,g,b;
+        LUVtoRGB(centroid[0],centroid[1],centroid[2],r,g,b);
+        vector<double> rgb;
+        rgb.push_back(r);
+        rgb.push_back(g);
+        rgb.push_back(b);
+        vec[i] = rgb;
     }
 }
 vector<vector<double>> convertMatToVector(cv::Mat image){
@@ -122,6 +132,15 @@ vector<vector<double>> convertMatToVector(cv::Mat image){
             vector<double> pixelColor;
             for(int k = 0;k<3;k++)
                 pixelColor.push_back(pixel[k]);
+
+            //convert rgb to luv
+            float l,u,v;
+            RGBtoLUV((int)pixelColor[0],(int)pixelColor[1],(int)pixelColor[2],l,u,v);
+            pixelColor.clear();
+            pixelColor.push_back(l);
+            pixelColor.push_back(u);
+            pixelColor.push_back(v);
+
 
             imageVector.push_back(pixelColor);
         }
@@ -154,6 +173,26 @@ void printCentroids(vector<vector<double>> centroids){
         qDebug("\n");
     }
 }
+void RGBtoLUV(int r, int g, int b, float& l, float& u, float& v) {
+    cv::Mat rgb(1, 1, CV_8UC3, cv::Scalar(b, g, r));
+    cv::Mat luv(1, 1, CV_8UC3);
+    cv::cvtColor(rgb, luv, cv::COLOR_BGR2Luv);
+    cv::Vec3b luvPixel = luv.at<cv::Vec3b>(0, 0);
+    l = luvPixel[0];
+    u = luvPixel[1];
+    v = luvPixel[2];
+}
+
+void LUVtoRGB(float l, float u, float v, int& r, int& g, int& b) {
+    cv::Mat luv(1, 1, CV_8UC3, cv::Scalar(l, u, v));
+    cv::Mat rgb(1, 1, CV_8UC3);
+    cv::cvtColor(luv, rgb, cv::COLOR_Luv2BGR);
+    cv::Vec3b rgbPixel = rgb.at<cv::Vec3b>(0, 0);
+    b = rgbPixel[0];
+    g = rgbPixel[1];
+    r = rgbPixel[2];
+}
+
 
 void kMeansMainFunction(cv::Mat &image, int K)
 {
@@ -162,13 +201,24 @@ void kMeansMainFunction(cv::Mat &image, int K)
         qDebug() << "Could not open or find the image";
         return;
     }
+//    cv::Mat img = cv::imread("image.jpg");
+//    cv::Mat img_luv;
+//    cv::cvtColor(image, img_luv, cv::COLOR_BGR2Luv);
 
     vector<vector<double>> imageVector = convertMatToVector(image);
     vector<vector<double>> centroids = kMeans_init_centroids(imageVector,K);
+
     printCentroids(centroids);
 
     vector<int> labels;
     centroids = run_kMeans(imageVector,centroids,labels);
+
+    printCentroids(centroids);
+
+//    cv::Mat centers_rgb;
+//    cv::cvtColor(centroids, centers_rgb, cv::COLOR_Luv2BGR);
+
+
     assignToClusters(imageVector,labels,centroids);
     processImageFromDataInVec(image,imageVector);
 
