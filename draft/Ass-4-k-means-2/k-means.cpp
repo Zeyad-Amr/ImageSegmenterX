@@ -173,6 +173,8 @@ void printCentroids(vector<vector<double>> centroids){
         qDebug("\n");
     }
 }
+// Start Converting RGB TO LUV
+
 void RGBtoLUV(int r, int g, int b, float& l, float& u, float& v) {
     cv::Mat rgb(1, 1, CV_8UC3, cv::Scalar(b, g, r));
     cv::Mat luv(1, 1, CV_8UC3);
@@ -183,6 +185,50 @@ void RGBtoLUV(int r, int g, int b, float& l, float& u, float& v) {
     v = luvPixel[2];
 }
 
+//void RGBtoLUV(int r, int g, int b, float& l, float& u, float& v) {
+//    float x, y, z, u0, v0, L;
+//    float r_linear, g_linear, b_linear;
+//
+//    // Convert RGB values to linear RGB
+//    float r_srgb = r / 255.0f;
+//    float g_srgb = g / 255.0f;
+//    float b_srgb = b / 255.0f;
+//    if (r_srgb <= 0.04090f) {
+//        r_linear = r_srgb / 12.92f;
+//    } else {
+//        r_linear = powf((r_srgb + 0.055f) / 1.055f, 2.4f);
+//    }
+//    if (g_srgb <= 0.04090f) {
+//        g_linear = g_srgb / 12.92f;
+//    } else {
+//        g_linear = powf((g_srgb + 0.055f) / 1.055f, 2.4f);
+//    }
+//    if (b_srgb <= 0.04090f) {
+//        b_linear = b_srgb / 12.92f;
+//    } else {
+//        b_linear = powf((b_srgb + 0.055f) / 1.055f, 2.4f);
+//    }
+//
+//    // Convert linear RGB to XYZ
+//    x = r_linear * 0.4124f + g_linear * 0.3576f + b_linear * 0.1805f;
+//    y = r_linear * 0.2126f + g_linear * 0.7152f + b_linear * 0.0722f;
+//    z = r_linear * 0.0193f + g_linear * 0.1192f + b_linear * 0.9505f;
+//
+//    // Convert XYZ to LUV
+//    u0 = 4.0f * 0.95047f / (0.95047f + 15.0f + 3.0f * 1.08883f);
+//    v0 = 9.0f / (0.95047f + 15.0f + 3.0f * 1.08883f);
+//    L = y > 0.008856f ? 116.0f * powf(y, 1.0f/3.0f) - 16.0f : 903.3f * y;
+//    u = 13.0f * L * (u0 * (4.0f * x / (x + 15.0f + 3.0f * 1.08883f)) - u0);
+//    v = 13.0f * L * (v0 * (9.0f * y / (x + 15.0f + 3.0f * 1.08883f)) - v0);
+//
+//    // Assign LUV values to output parameters
+//    l = L;
+//}
+
+// End Converting RGB to LUV
+
+
+// Start Converting LUV to RGB
 void LUVtoRGB(float l, float u, float v, int& r, int& g, int& b) {
     cv::Mat luv(1, 1, CV_8UC3, cv::Scalar(l, u, v));
     cv::Mat rgb(1, 1, CV_8UC3);
@@ -192,6 +238,43 @@ void LUVtoRGB(float l, float u, float v, int& r, int& g, int& b) {
     g = rgbPixel[1];
     r = rgbPixel[2];
 }
+
+void LUVtoRGB(float l, float u, float v, int& r, int& g, int& b) {
+    float y, x, z;
+
+    // Compute intermediate values
+    float yVal = (l + 16.0) / 116.0;
+    float uVal = u / 13.0 + 0.5;
+    float vVal = v / 13.0 + 0.5;
+
+    // Convert from LUV to XYZ
+    if (l > 7.9996) {
+        y = std::pow(yVal, 3.0);
+    } else {
+        y = (l / 903.3);
+    }
+
+    float a = (52.0 * l / (uVal + 13.0 * l * 0.1975) - 1.0) / 3.0;
+    x = y * ((9.0 * a) / ((4.0 * vVal) - (a * 1.3333)));
+    z = y * ((12.0 - (3.0 * a) - (20.0 * vVal)) / (4.0 * vVal));
+
+    // Convert from XYZ to RGB
+    float rFloat = x * 3.2406 - y * 1.5372 - z * 0.4986;
+    float gFloat = -x * 0.9689 + y * 1.8758 + z * 0.0415;
+    float bFloat = x * 0.0557 - y * 0.2040 + z * 1.0570;
+
+    // Convert floating point values to integers
+    r = std::round(rFloat * 255);
+    g = std::round(gFloat * 255);
+    b = std::round(bFloat * 255);
+
+    // Ensure that the output RGB values are within the valid range of [0, 255]
+    r = std::max(0, std::min(r, 255));
+    g = std::max(0, std::min(g, 255));
+    b = std::max(0, std::min(b, 255));
+}
+
+// End Converting LUV to RGB
 
 
 void kMeansMainFunction(cv::Mat &image, int K)
