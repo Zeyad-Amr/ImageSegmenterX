@@ -211,8 +211,7 @@ Segmentation using agglomerative clustering can be effective for images with dis
 
 <br/>
     
-![WhatsApp Image 2023-03-14 at 7 59 27 PM](https://user-images.githubusercontent.com/68791488/225125058-17cb0214-6759-44b2-8d35-4aa922aab3c1.jpeg)
-
+![Agglomerative](https://user-images.githubusercontent.com/84360276/236068778-aa0b2662-e7b4-444e-b731-12bbec2f9afb.jpg)
 
 <br/>
 <hr/>
