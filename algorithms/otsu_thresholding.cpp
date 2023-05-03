@@ -20,7 +20,7 @@ void otsu_thresholding::apply(Mat inputImg, Mat& output)
         histogram[i] = 0;
     }
 
-    // calculate the no of pixels for each intensity values
+    // calculate the no of img for each intensity values
     for (int y = 0; y < inputImg.rows; y++)
         for (int x = 0; x < inputImg.cols; x++)
             histogram[(int)inputImg.at<uchar>(y, x)]++;

@@ -30,7 +30,7 @@ int optimal_thresholding::get_optimal_threshold(cv::Mat &image) {
             hist[image.at<uchar>(i, j)]++;
         }
     }
-    int total_pixels = image.rows * image.cols;
+    int total_img = image.rows * image.cols;
     double sum = 0;
     for (int i = 0; i < 256; i++) {
         sum += i * hist[i];
@@ -45,7 +45,7 @@ int optimal_thresholding::get_optimal_threshold(cv::Mat &image) {
         if (wB == 0) {
             continue;
         }
-        wF = total_pixels - wB;
+        wF = total_img - wB;
         if (wF == 0) {
             break;
         }

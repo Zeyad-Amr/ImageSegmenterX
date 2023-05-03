@@ -11,8 +11,10 @@ using namespace cv;
 #include "kmean.h"
 #include "mean_shift.h"
 #include "local_thresholding.h"
+#include "agglomerative.h"
+
 int main() {
-    Mat image = imread("03.jfif");
+    Mat image = imread("02.jfif");
     if (image.empty()) {
         cout << "Error: Could not read image file." << endl;
         return -1;
@@ -20,7 +22,7 @@ int main() {
         imshow("Original Image", image);
     }
 
-    int option=6;
+    int option=7;
     Mat output;
 
     if(option==0){
@@ -52,13 +54,14 @@ int main() {
     }else if(option==6){
         local_thresholding().apply(image, output,40,10);
         imshow("Local Thresholding",output);
+    }else if(option==7){
+        agglomerative().apply(image, output);
+        imshow("Agglomerative",output);
     }
 
 
     waitKey(0);
     return 0;
 }
-
-
 
 

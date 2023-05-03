@@ -58,17 +58,6 @@ std::vector<Cluster> agglomerativeClustering(const std::vector<Pixel>& pixels, i
     return clusters;
 }
 
-class MainWindow : public QMainWindow {
-    Q_OBJECT
-public:
-    explicit MainWindow(QWidget *parent = nullptr);
-private slots:
-    void openImage();
-    void segmentImage();
-private:
-    QLabel *imageLabel;
-    QImage image;
-};
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     // Create the menu bar
