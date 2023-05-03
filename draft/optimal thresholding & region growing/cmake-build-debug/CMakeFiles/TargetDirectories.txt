@@ -1,0 +1,3 @@
+C:/Users/Zeyad/Documents/GitHub/a04-16/draft/optimal thresholding & region growing/cmake-build-debug/CMakeFiles/untitled.dir
+C:/Users/Zeyad/Documents/GitHub/a04-16/draft/optimal thresholding & region growing/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Zeyad/Documents/GitHub/a04-16/draft/optimal thresholding & region growing/cmake-build-debug/CMakeFiles/rebuild_cache.dir
