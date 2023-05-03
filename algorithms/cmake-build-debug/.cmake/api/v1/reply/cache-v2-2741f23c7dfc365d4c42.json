@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/Zeyad/CLionProjects/algorithms/cmake-build-debug"
+			"value" : "c:/Users/Zeyad/Documents/GitHub/a04-16/algorithms/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -575,7 +575,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Zeyad/CLionProjects/algorithms/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/Zeyad/Documents/GitHub/a04-16/algorithms/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -647,7 +647,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/Zeyad/CLionProjects/algorithms"
+			"value" : "C:/Users/Zeyad/Documents/GitHub/a04-16/algorithms"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -687,7 +687,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/ninja/win/x64/ninja.exe"
+			"value" : "C:/Program Files/JetBrains/CLion 2023.1.2/bin/ninja/win/x64/ninja.exe"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -1287,7 +1287,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Zeyad/CLionProjects/algorithms/cmake-build-debug"
+			"value" : "C:/Users/Zeyad/Documents/GitHub/a04-16/algorithms/cmake-build-debug"
 		},
 		{
 			"name" : "algorithms_IS_TOP_LEVEL",
@@ -1311,7 +1311,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Zeyad/CLionProjects/algorithms"
+			"value" : "C:/Users/Zeyad/Documents/GitHub/a04-16/algorithms"
 		}
 	],
 	"kind" : "cache",

@@ -3,7 +3,7 @@
 //
 
 #include "region_growing.h"
-
+using namespace cv;
 region_growing::region_growing() {}
 
 void region_growing::region_grow_gray(Mat& image, Mat& result, int x, int y) {
@@ -41,7 +41,7 @@ void region_growing::region_grow_color(Mat& image, Mat& result, int x, int y) {
     region_grow_color(image, result, x, y + 1); // Check bottom pixel
 }
 
-void region_growing::apply(cv::Mat &image) {
+void region_growing::apply(Mat image, Mat& output) {
 
     Mat result(image.rows, image.cols, CV_8UC1, Scalar(0));
     if (image.channels() == 1) {
@@ -59,5 +59,6 @@ void region_growing::apply(cv::Mat &image) {
             }
         }
     }
-    image =result;
+
+    output = result;
 }

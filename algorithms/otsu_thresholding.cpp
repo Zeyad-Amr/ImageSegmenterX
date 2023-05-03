@@ -6,7 +6,7 @@
 
 otsu_thresholding::otsu_thresholding() {}
 
-void otsu_thresholding::apply(Mat& inputImg)
+void otsu_thresholding::apply(Mat inputImg, Mat& output)
 {
     cvtColor(inputImg, inputImg, COLOR_BGR2GRAY);
     int bins_num = 256;
@@ -123,5 +123,5 @@ void otsu_thresholding::apply(Mat& inputImg)
             {
                 dist.at<uchar>(y, x) = 255;
             }
-            inputImg=dist;
+            output=dist;
 }

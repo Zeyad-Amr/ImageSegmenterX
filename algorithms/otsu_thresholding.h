@@ -13,7 +13,7 @@ using namespace cv;
 class otsu_thresholding {
 public:
     otsu_thresholding();
-    static void apply(Mat& inputImg);
+    static void apply(Mat inputImg, Mat& output);
 
 };
 

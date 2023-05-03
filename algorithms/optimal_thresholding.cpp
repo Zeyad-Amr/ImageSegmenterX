@@ -8,7 +8,8 @@ optimal_thresholding::optimal_thresholding() {
 
 }
 
-void optimal_thresholding::apply(Mat& image) {
+void optimal_thresholding::apply(Mat image, Mat& output) {
+    cvtColor(image, image, COLOR_BGR2GRAY);
     int threshold = get_optimal_threshold(image);
     for (int i = 0; i < image.rows; i++) {
         for (int j = 0; j < image.cols; j++) {
@@ -19,6 +20,7 @@ void optimal_thresholding::apply(Mat& image) {
             }
         }
     }
+    output=image;
 }
 
 int optimal_thresholding::get_optimal_threshold(cv::Mat &image) {

@@ -19,7 +19,7 @@ public:
 
     region_growing();
 
-   static void apply(Mat& image);
+   static void apply(Mat image, Mat& output);
 
 };
 

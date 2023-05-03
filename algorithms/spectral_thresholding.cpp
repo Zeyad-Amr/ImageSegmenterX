@@ -18,7 +18,7 @@ void spectral_thresholding:: computeHistogram(const Mat& image, int histogram[])
     }
 }
 
-void spectral_thresholding::apply(Mat& image, int numModes) {
+void spectral_thresholding::apply(Mat image,Mat& output, int numModes) {
     if (image.empty()) {
         return;
     }
@@ -61,5 +61,5 @@ void spectral_thresholding::apply(Mat& image, int numModes) {
         }
     }
 
-    image = segmentedImage;
+    output = segmentedImage;
 }

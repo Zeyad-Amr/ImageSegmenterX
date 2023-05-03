@@ -17,7 +17,7 @@ public:
     optimal_thresholding();
 
 
-   static void apply(Mat& image) ;
+   static void apply(Mat image, Mat& output) ;
 
 };
 

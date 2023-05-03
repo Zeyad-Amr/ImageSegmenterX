@@ -15,7 +15,7 @@ private:
 public:
     spectral_thresholding();
 
-  static  void apply(Mat& image, int numModes);
+  static  void apply(Mat image,Mat& output, int numModes);
 
 
 };
