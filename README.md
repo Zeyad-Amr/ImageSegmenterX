@@ -51,8 +51,7 @@ The choice of which method to use depends on the characteristics of the image be
 
 <br/>
 
-    
-![WhatsApp Image 2023-03-14 at 7 32 04 PM](https://user-images.githubusercontent.com/68791488/225124415-cb2d74a2-0f94-419f-a845-9fae28da55ec.jpeg)
+![optimal](https://user-images.githubusercontent.com/84360276/236067252-d334d74b-c6b2-4d26-a982-4892b13b6145.jpg)    
 
 
 <br/>
@@ -72,9 +71,7 @@ Otsu's method is effective for images with bimodal intensity distributions, wher
 
 <br/>
 
-    
-![WhatsApp Image 2023-03-14 at 7 31 49 PM](https://user-images.githubusercontent.com/68791488/225124652-f466e75e-ba1e-4baf-b80c-267cbb7f9b0b.jpeg)
-
+![otsu](https://user-images.githubusercontent.com/84360276/236067292-90574bbd-2273-4b18-a310-37c852c4d01e.jpg)
 
 <br/>
 <hr/>
@@ -90,10 +87,34 @@ The process of spectral thresholding involves computing the spectral features of
 
 Spectral thresholding can be useful for segmenting images in applications such as medical imaging, remote sensing, and computer vision. However, it can be computationally intensive and may not be suitable for real-time applications or large datasets. Other thresholding methods, such as Otsu's method or adaptive thresholding, may be more appropriate in such cases.
 
+<br/>
+
+### Mode 1 :
+
+![spectral-mode1](https://user-images.githubusercontent.com/84360276/236066012-29fca02f-5c23-46d8-a777-02f564e3aaeb.jpg)
+
 
 <br/>
 
-![WhatsApp Image 2023-03-14 at 7 31 33 PM](https://user-images.githubusercontent.com/68791488/225124678-e0e1974f-9313-4564-9afa-fa1932f85650.jpeg)
+### Mode 2 :
+
+![spectral-mode2](https://user-images.githubusercontent.com/84360276/236066040-dcaf6d4a-d241-42b9-a026-e38aef2c9c44.jpg)
+
+
+<br/>
+
+### Mode 3 :
+
+![spectral-mode3](https://user-images.githubusercontent.com/84360276/236066068-648f1929-44d3-42c5-914c-b6f14cd3e2f9.jpg)
+
+
+<br/>
+
+### Mode 4 :
+
+![spectral - thresholding](https://user-images.githubusercontent.com/84360276/236065061-418f98a5-758f-41ab-ae8b-6f7f18b94cf5.jpeg)
+
+<br/>
 
 
 <br/>
@@ -114,7 +135,7 @@ Local thresholding can be useful for segmenting images in applications such as d
 
 <br/>
     
-![WhatsApp Image 2023-03-14 at 7 59 27 PM](https://user-images.githubusercontent.com/68791488/225125058-17cb0214-6759-44b2-8d35-4aa922aab3c1.jpeg)
+![local-thresholding](https://user-images.githubusercontent.com/84360276/236066501-dab28715-61f9-45c3-86d8-b7fe54089ac5.jpg)
 
 
 <br/>
@@ -139,9 +160,8 @@ The number of clusters k is typically chosen based on the characteristics of the
 Segmentation using k-means can be effective for images with distinct regions or objects that have different color or intensity values. However, it may not perform well for images with complex textures or patterns or when the objects of interest have similar color or intensity values. In such cases, other segmentation methods, such as graph-based or region-based segmentation, may be more appropriate.
 
 <br/>
-    
-![WhatsApp Image 2023-03-14 at 7 59 27 PM](https://user-images.githubusercontent.com/68791488/225125058-17cb0214-6759-44b2-8d35-4aa922aab3c1.jpeg)
 
+![k-means](https://user-images.githubusercontent.com/84360276/236066600-9f8e79fd-e371-45aa-b15f-6d5b712074f8.jpg)
 
 <br/>
 <hr/>
@@ -166,8 +186,7 @@ Segmentation using region growing can be effective for images with distinct regi
 
 <br/>
     
-![WhatsApp Image 2023-03-14 at 7 59 27 PM](https://user-images.githubusercontent.com/68791488/225125058-17cb0214-6759-44b2-8d35-4aa922aab3c1.jpeg)
-
+![region-growing](https://user-images.githubusercontent.com/84360276/236066644-5be1aa5a-8457-4622-9f21-c604e3bcca77.jpg)
 
 <br/>
 <hr/>
@@ -219,7 +238,7 @@ Segmentation using mean shift can be effective for images with distinct regions 
 
 <br/>
     
-![WhatsApp Image 2023-03-14 at 7 59 27 PM](https://user-images.githubusercontent.com/68791488/225125058-17cb0214-6759-44b2-8d35-4aa922aab3c1.jpeg)
+![mean-shift](https://user-images.githubusercontent.com/84360276/236066716-371ec9fb-2a26-4bf8-b306-ec3525cff80e.jpg)
 
 
 <br/>
