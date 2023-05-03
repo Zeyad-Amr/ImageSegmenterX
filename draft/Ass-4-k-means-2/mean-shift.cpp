@@ -9,6 +9,7 @@ double linalgNorm(std::vector<double> arr1,std::vector<double> arr2){
     return sqrt(norm);
 }
 
+//valid only for 2d feature data.
 void showCentroids(cv::Mat& image, std::vector<std::vector<double>>& centroids) {
     // Draw a red circle at each centroid location
     for (auto& centroid : centroids) {
