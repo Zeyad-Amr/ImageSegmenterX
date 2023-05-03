@@ -10,8 +10,9 @@ using namespace cv;
 #include "otsu_thresholding.h"
 #include "kmean.h"
 #include "mean_shift.h"
+#include "local_thresholding.h"
 int main() {
-    Mat image = imread("02.jfif");
+    Mat image = imread("03.jfif");
     if (image.empty()) {
         cout << "Error: Could not read image file." << endl;
         return -1;
@@ -19,7 +20,7 @@ int main() {
         imshow("Original Image", image);
     }
 
-    int option=4;
+    int option=6;
     Mat output;
 
     if(option==0){
@@ -48,6 +49,9 @@ int main() {
     }else if(option==5){
         mean_shift().apply(image, output, 100);
         imshow("Mean Shift",output);
+    }else if(option==6){
+        local_thresholding().apply(image, output,40,10);
+        imshow("Local Thresholding",output);
     }
 
 
