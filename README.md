@@ -8,21 +8,26 @@
 - [Introduction](#introduction)
 - [Technologies](#technologies)
 - [How to Use](#how-to-use)
-- [Features](#features)
-- [Harris operator](#harris-operator)
-- [SIFT](#sift)
-- [Matching the images](#matching-the-images)
-- [SSD](#ssd)
-- [NCC](#ncc)
+- [Optimal thresholding](#optimal-thresholding)
+- [Otsu](#otsu)
+- [Spectral thresholding](#spectral-thresholding)
+- [Local thresholding](#local-thresholding)
+- [k-means](#k-means)
+- [Region growing](#region-growing)
+- [Agglomerative](#agglomerative)
+- [Mean shift](#mean-shift)
 - [Contributing](#contributing)
 - [Developers](#developers)
 
 ## Introduction
-It’s a desktop application that aims to involve analyzing images to extract information and identify unique features. In this context, the Harris operator is a widely used algorithm for feature detection, which highlights areas of high contrast in an image. By using Harris operator and λ, we can extract unique features from all images.
+It’s a desktop application that aims to involve dividing an image into different regions or objects based on their visual characteristics. In this context, several methods are available to segment images into different regions, each with its own strengths and weaknesses.
 
-To further process these features, the Scale-Invariant Feature Transform (SIFT) algorithm is used to generate feature descriptors that are invariant to scale, rotation, and illumination changes. These descriptors are used to identify key points in an image that can be used for matching.
+In the case of grayscale images, thresholding is a popular method to segment images into different regions. This can be achieved using various thresholding methods such as optimal thresholding, Otsu's method, spectral thresholding, and local thresholding. 
 
-Matching the features across multiple images is done using techniques such as Sum of Squared Differences (SSD) and Normalized Cross Correlations. These techniques measure the similarity between pairs of features in different images and help to identify correspondences between them.
+In the case of gray/color images, unsupervised segmentation methods are widely used to segment images into different regions. Some of the popular unsupervised segmentation methods include k-means clustering, region growing, agglomerative clustering, and mean shift segmentation. K-means clustering involves clustering pixels based on their similarity, while region growing involves grouping together adjacent pixels that have similar characteristics. Agglomerative clustering merges adjacent clusters based on their similarity, and mean shift segmentation involves shifting a window over the image to group together pixels with similar characteristics.
+
+Overall, each of these methods has its own advantages and disadvantages, and the choice of segmentation method depends on the characteristics of the image and the specific application requirements.
+
 
 
 ## Technologies
@@ -32,129 +37,195 @@ Matching the features across multiple images is done using techniques such as Su
 
 ## How to Use
 
-1. Clone the repository using the command `git clone https://github.com/Zeyad-Amr/Photostudio`
+1. Clone the repository using the command `git clone https://github.com/Computer-Vision-Spring23/a04-16.git`
 
 
-# Features
-## Harris operator :
+# Thresholding 
+## optimal thresholding : 
 
-The Harris corner detector is a popular algorithm used for detecting and extracting unique features in an image. It is based on the assumption that a corner in an image is a region of the image where the gradient vector has a significant change in both directions. The Harris operator uses a mathematical formula to detect such regions.
+Optimal thresholding is a method used in image processing to determine the optimal threshold value for binarizing an image. Binarization involves converting a grayscale image into a binary image, where each pixel is either black or white based on its intensity value compared to a threshold value.
 
-To extract unique features in all images using Harris operator and λ, we can follow the following steps:
+The optimal threshold value is the value that maximizes the separation between foreground and background pixels, making it the most appropriate value to use for binarization. There are several methods to find the optimal threshold value, including Otsu's method, the Triangle method, and the Kapur's entropy method.
 
-1. Convert the images to grayscale: The Harris operator works on grayscale images. Therefore, we need to convert the images to grayscale.
+The choice of which method to use depends on the characteristics of the image being processed, such as its contrast, noise, and distribution of pixel intensities. Optimal thresholding can improve the accuracy and effectiveness of subsequent image analysis tasks, such as segmentation and feature extraction.
 
-2. Compute the image gradient: Compute the gradient of the image in both the x and y directions. This can be done using edge detection filters such as Sobel, Prewitt, or Roberts.
-
-3. Compute the Harris response: Using the gradient images, compute the Harris response for each pixel in the image. The Harris response is calculated as follows:
-
-- R = det(M) - k(trace(M))^2
-
-- where det(M) and trace(M) are the determinant and trace of the matrix M, respectively. The value of k is a constant that depends on the sensitivity of the operator to the corner-like structures. A typical value of k is 0.04.
-
-4. Thresholding: Threshold the Harris response values to obtain a binary image with only the regions of interest. This step is important to remove false positives and retain only the regions that correspond to unique features in the image.
-
-5. Non-maximum suppression: Perform non-maximum suppression to obtain a set of points that represent the unique features in the image. This step involves selecting only the local maxima of the Harris response values and discarding the other points that are not significant.
-
-6. Repeat steps 1 to 5 for all images: Repeat the above steps for all the images in the dataset to extract the unique features in each image.
+<br/>
 
     
 ![WhatsApp Image 2023-03-14 at 7 32 04 PM](https://user-images.githubusercontent.com/68791488/225124415-cb2d74a2-0f94-419f-a845-9fae28da55ec.jpeg)
 
-- In summary, the Harris operator and λ can be used to detect and extract unique features in images by computing the Harris response for each pixel in the image and thresholding the response values to obtain a binary image with only the regions of interest. Non-maximum suppression is then performed to obtain a set of points that represent the unique features in the image.
 
 <br/>
 <hr/>
 <br/>
 
 
-## SIFT :
+## Otsu : 
 
-Scale-Invariant Feature Transform (SIFT) is a feature detection and extraction algorithm used in computer vision to identify unique features in images that are invariant to scale, rotation, and illumination changes. These features are represented by feature descriptors, which are used to identify and match corresponding features across multiple images.
+Otsu's method is a popular image thresholding technique that is used to automatically determine the optimal threshold value for binarization of grayscale images. It was developed by Nobuyuki Otsu in 1979 and is widely used in image processing applications.
 
-The SIFT algorithm consists of several steps for generating feature descriptors, which are as follows:
+Otsu's method works by analyzing the histogram of pixel intensities in an image and finding the threshold value that maximizes the separation between the foreground and background pixels. The separation between the two classes of pixels is quantified using the between-class variance, which is defined as the sum of the variances of the two classes weighted by their probabilities.
 
-1. Scale-space extrema detection: The first step in the SIFT algorithm is to detect key points in the image that are invariant to scale. This is achieved by computing the difference of Gaussian (DoG) pyramid for the image, which is a series of blurred and downsampled images. The extrema of the DoG pyramid are then detected using the Scale-Space Extrema Detection algorithm.
+The algorithm starts by calculating the histogram of the image, which is a count of the number of pixels at each intensity level. It then computes the probabilities of each intensity level and the cumulative probabilities up to each intensity level. Using these values, it computes the between-class variance for each possible threshold value and selects the threshold that maximizes this value.
 
-2. Keypoint localization: The key points detected in the previous step are then refined by eliminating those that have low contrast, are located on edges or corners, or are unstable. This is done by comparing the intensity values at the key point with the values in its local neighborhood.
+Otsu's method is effective for images with bimodal intensity distributions, where the foreground and background pixels have distinct peaks in the histogram. However, it may not perform well for images with more complex distributions. In such cases, other thresholding methods, such as the adaptive thresholding, may be more appropriate.
 
-3. Orientation assignment: Once the key points are detected and localized, their orientations are assigned based on the gradient direction at the key point. This makes the feature descriptors invariant to rotation.
-
-
-
-
-4. Descriptor generation: The final step in the SIFT algorithm is to generate the feature descriptors for each key point. The descriptor is a vector of 128 elements that captures the local image structure around the key point. The descriptor is computed by dividing the local neighborhood around the key point into sub-regions, computing the gradient magnitude and orientation for each sub-region, and then assembling these values into a histogram. The histogram is then normalized to account for changes in illumination and contrast.
-
-5. Descriptor matching: Once the feature descriptors are generated for all the key points in the image, they can be used to match corresponding features across multiple images. This is done by comparing the Euclidean distance between the descriptors of two features. The features with the lowest distance are considered to be a match.
+<br/>
 
     
 ![WhatsApp Image 2023-03-14 at 7 31 49 PM](https://user-images.githubusercontent.com/68791488/225124652-f466e75e-ba1e-4baf-b80c-267cbb7f9b0b.jpeg)
 
-- In summary, the SIFT algorithm generates feature descriptors by detecting scale-invariant key points, refining them through keypoint localization, assigning orientation based on gradient direction, and generating a 128-element vector that represents the local image structure around the key point. These feature descriptors are then used to match corresponding features across multiple images.
 
 <br/>
 <hr/>
 <br/>
 
-## Matching the images:
-### SSD : 
+## Spectral thresholding :
 
-Matching image set features is the process of identifying corresponding features between two or more images. One commonly used method for matching features is the Sum of Squared Differences (SSD) technique. The SSD method is based on the principle that corresponding features in two images should have similar intensity values.
+Spectral thresholding is a method used in image processing and computer vision to segment an image into different regions based on the spectral characteristics of the image. In particular, it involves using the spectral properties of an image to identify areas of interest and separate them from the background.
 
-The steps involved in matching image set features using SSD are as follows:
+The term "spectral" refers to the different frequency components of an image, which can be represented by the Fourier transform or other frequency-based methods. In spectral thresholding, these frequency components are used to distinguish between different regions of the image.
 
-1. Compute feature descriptors: The first step in matching image set features using SSD is to compute the feature descriptors for each image. This is typically done using techniques such as SIFT, which generates a vector of numerical values that describe the local image structure around a key point.
+The process of spectral thresholding involves computing the spectral features of an image, such as the Fourier transform or wavelet transform, and then selecting a threshold value to separate the regions of interest from the background. The threshold value is chosen based on the statistical properties of the spectral features, such as their mean and variance.
 
-2. Select feature pairs: Next, a set of feature pairs is selected for matching. This can be done in various ways, such as selecting the N best matches based on the Euclidean distance between the feature descriptors.
+Spectral thresholding can be useful for segmenting images in applications such as medical imaging, remote sensing, and computer vision. However, it can be computationally intensive and may not be suitable for real-time applications or large datasets. Other thresholding methods, such as Otsu's method or adaptive thresholding, may be more appropriate in such cases.
 
-3. Compute the SSD: For each feature pair, the SSD is computed by taking the sum of the squared differences between the corresponding pixel values in the two images. This is calculated using the following formula:
 
-- SSD = Σ(I1(x,y) - I2(x,y))^2
-
-- where I1(x,y) and I2(x,y) are the intensity values of the corresponding pixels in the two images.
-
-4. Select the best match: Once the SSD is computed for all feature pairs, the best match is selected based on the feature pair with the lowest SSD value. This feature pair is considered to be the corresponding pair of features in the two images.
-
-5. Repeat for all feature pairs: The above steps are repeated for all feature pairs, resulting in a set of corresponding features between the two images.
-
+<br/>
 
 ![WhatsApp Image 2023-03-14 at 7 31 33 PM](https://user-images.githubusercontent.com/68791488/225124678-e0e1974f-9313-4564-9afa-fa1932f85650.jpeg)
 
-- In summary, matching image set features using SSD involves computing the feature descriptors for each image, selecting feature pairs, computing the SSD between corresponding pixels in the two images, and selecting the best match based on the lowest SSD value. This process is repeated for all feature pairs, resulting in a set of corresponding features between the two images.
 
 <br/>
 <hr/>
 <br/>
 
-### NCC : 
-Matching image set features using normalized cross-correlation (NCC) is another method for identifying corresponding features between two or more images. This method is based on the principle that corresponding features in two images should have similar patterns, even if their intensity values differ.
+## Local thresholding : 
+Local thresholding is a method used in image processing and computer vision to segment an image into different regions based on the local properties of the image. In particular, it involves using a different threshold value for each pixel or local neighborhood of pixels based on their local intensity characteristics.
 
-The steps involved in matching image set features using NCC are as follows:
+Local thresholding is often used when the global thresholding methods, such as Otsu's method or spectral thresholding, fail to provide satisfactory results. This is often the case when the image has non-uniform illumination or when the foreground and background regions have different contrast levels.
 
-1. Compute feature descriptors: The first step in matching image set features using NCC is to compute the feature descriptors for each image. This is typically done using techniques such as SIFT or SURF, which generate a vector of numerical values that describe the local image structure around a key point.
+The process of local thresholding involves computing a threshold value for each pixel or a local neighborhood of pixels based on its local intensity characteristics, such as its mean or variance. The threshold value is then applied to the corresponding pixel or pixels to obtain a binary image.
 
-2. Select feature pairs: Next, a set of feature pairs is selected for matching. This can be done in various ways, such as selecting the N best matches based on the Euclidean distance between the feature descriptors.
+There are several methods for local thresholding, including the Niblack method, the Sauvola method, and the Bradley method. These methods differ in their approach to computing the local threshold value, but they all aim to adapt the threshold to the local properties of the image.
 
-3. Compute the normalized cross-correlation: For each feature pair, the NCC is computed by calculating the correlation coefficient between the corresponding pixel values in the two images. The correlation coefficient is a measure of how well the patterns in the two images match, even if their intensity values differ. The NCC is calculated using the following formula:
+Local thresholding can be useful for segmenting images in applications such as document processing, character recognition, and defect detection. However, it can also be computationally intensive and may require fine-tuning of the parameters to achieve satisfactory results.
 
 
-
-- NCC = Σ((I1(x,y) - μ1) * (I2(x,y) - μ2)) / (σ1 * σ2)
-
-- where I1(x,y) and I2(x,y) are the intensity values of the corresponding pixels in the two images, μ1 and μ2 are the means of the intensities in the corresponding regions, and σ1 and σ2 are the standard deviations of the intensities in the corresponding regions.
-
-4. Select the best match: Once the NCC is computed for all feature pairs, the best match is selected based on the feature pair with the highest NCC value. This feature pair is considered to be the corresponding pair of features in the two images.
-
-5. Repeat for all feature pairs: The above steps are repeated for all feature pairs, resulting in a set of corresponding features between the two images.
-
+<br/>
     
 ![WhatsApp Image 2023-03-14 at 7 59 27 PM](https://user-images.githubusercontent.com/68791488/225125058-17cb0214-6759-44b2-8d35-4aa922aab3c1.jpeg)
 
-- In summary, matching image set features using NCC involves computing the feature descriptors for each image, selecting feature pairs, computing the NCC between corresponding pixels in the two images, and selecting the best match based on the highest NCC value. This process is repeated for all feature pairs, resulting in a set of corresponding features between the two images.
 
 <br/>
 <hr/>
 <br/>
+
+# Segmentation
+## k-means : 
+
+Segmentation using k-means is a method used in image processing and computer vision to segment an image into different regions based on the similarity of their color or intensity values. It involves clustering the pixels in an image into k clusters based on their color or intensity values and then assigning each pixel to the cluster with the closest color or intensity value.
+
+The k-means algorithm is an unsupervised machine learning technique that iteratively partitions the data points into k clusters based on their distance to the cluster centers. In image segmentation, each pixel is treated as a data point with its color or intensity values as the feature vector.
+
+The process of segmentation using k-means involves the following steps:
+
+###  1. Initialize k cluster centers randomly
+#### 2. Assign each pixel to the cluster with the closest color or intensity value
+#### 3. Recalculate the cluster centers based on the mean color or intensity value of the pixels in each cluster
+#### 4. Repeat steps 2 and 3 until convergence is reached or a maximum number of iterations is reached
+The number of clusters k is typically chosen based on the characteristics of the image and the segmentation task. For example, k may be set to the number of regions or objects of interest in the image.
+
+Segmentation using k-means can be effective for images with distinct regions or objects that have different color or intensity values. However, it may not perform well for images with complex textures or patterns or when the objects of interest have similar color or intensity values. In such cases, other segmentation methods, such as graph-based or region-based segmentation, may be more appropriate.
+
+<br/>
+    
+![WhatsApp Image 2023-03-14 at 7 59 27 PM](https://user-images.githubusercontent.com/68791488/225125058-17cb0214-6759-44b2-8d35-4aa922aab3c1.jpeg)
+
+
+<br/>
+<hr/>
+<br/>
+
+##  region growing : 
+Segmentation using region growing is a method used in image processing and computer vision to segment an image into different regions based on the similarity of neighboring pixels. It involves grouping together adjacent pixels that have similar characteristics, such as color or intensity, to form a region.
+
+The region growing algorithm starts with an initial seed pixel or set of seed pixels that belong to a particular region. The algorithm then iteratively adds neighboring pixels to the region if they meet certain criteria, such as having similar color or intensity values. The process continues until no more pixels can be added to the region or a stopping criterion is reached.
+
+The process of segmentation using region growing involves the following steps:
+
+Select one or more seed pixels that belong to a region of interest.
+Define a similarity criterion, such as the difference in color or intensity values between neighboring pixels.
+For each seed pixel, examine its neighboring pixels and compare their similarity to the seed pixel based on the similarity criterion.
+If a neighboring pixel satisfies the similarity criterion, add it to the region and consider its neighboring pixels in the next iteration.
+Repeat steps 3 and 4 until no more pixels can be added to the region or a stopping criterion is reached.
+
+The stopping criterion can be based on various factors, such as the size of the region, the number of iterations, or a threshold value for the similarity criterion.
+
+Segmentation using region growing can be effective for images with distinct regions or objects that have similar color or intensity values. However, it may not perform well for images with complex textures or patterns or when the objects of interest have different colors or intensities. In such cases, other segmentation methods, such as k-means clustering or graph-based segmentation, may be more appropriate.
+
+<br/>
+    
+![WhatsApp Image 2023-03-14 at 7 59 27 PM](https://user-images.githubusercontent.com/68791488/225125058-17cb0214-6759-44b2-8d35-4aa922aab3c1.jpeg)
+
+
+<br/>
+<hr/>
+<br/>
+
+## Agglomerative :
+Segmentation using agglomerative clustering is a method used in image processing and computer vision to segment an image into different regions based on the similarity of neighboring pixels. It involves grouping together adjacent pixels based on their similarity, and progressively merging these groups until a specified number of regions is obtained.
+
+The agglomerative clustering algorithm starts by treating each pixel in the image as a separate cluster. The algorithm then iteratively merges the two closest clusters based on a similarity measure, such as the Euclidean distance between their color or intensity values. The process continues until the desired number of clusters or regions is obtained.
+
+The process of segmentation using agglomerative clustering involves the following steps:
+
+Treat each pixel in the image as a separate cluster.
+Define a similarity measure between clusters, such as the Euclidean distance between their color or intensity values.
+Merge the two closest clusters based on the similarity measure.
+Recalculate the similarity measure between the new cluster and the remaining clusters.
+Repeat steps 3 and 4 until the desired number of clusters or regions is obtained.
+The desired number of clusters can be specified in advance or determined automatically using methods such as the elbow method or silhouette analysis.
+
+Segmentation using agglomerative clustering can be effective for images with distinct regions or objects that have different color or intensity values. However, it may not perform well for images with complex textures or patterns or when the objects of interest have similar colors or intensities. In such cases, other segmentation methods, such as k-means clustering or region growing, may be more appropriate.
+
+
+<br/>
+    
+![WhatsApp Image 2023-03-14 at 7 59 27 PM](https://user-images.githubusercontent.com/68791488/225125058-17cb0214-6759-44b2-8d35-4aa922aab3c1.jpeg)
+
+
+<br/>
+<hr/>
+<br/>
+
+##  Mean shift : 
+Segmentation using mean shift is a method used in image processing and computer vision to segment an image into different regions based on the similarity of neighboring pixels. It involves shifting a window over the image and iteratively updating the position of the window center to the mean of the pixels within the window until convergence is reached.
+
+The mean shift algorithm starts with a window centered at a pixel of interest. The algorithm then computes the mean color or intensity values of the pixels within the window and shifts the window center to the location of the mean. This process is repeated until convergence is reached, which occurs when the window center no longer moves or moves by less than a specified threshold.
+
+The process of segmentation using mean shift involves the following steps:
+
+Choose a pixel of interest and a window size.
+Compute the mean color or intensity values of the pixels within the window.
+Shift the window center to the location of the mean.
+Repeat steps 2 and 3 until convergence is reached.
+
+Once the mean shift process is complete, each pixel in the image is assigned to the cluster associated with the window center it falls within. The result is a segmentation of the image into different regions based on the similarity of neighboring pixels.
+
+
+
+Segmentation using mean shift can be effective for images with distinct regions or objects that have different color or intensity values. It can also handle images with complex textures or patterns. However, it may not perform well for images with very large or very small regions or when the objects of interest have similar colors or intensities. In such cases, other segmentation methods, such as agglomerative clustering or region growing, may be more appropriate.
+
+<br/>
+    
+![WhatsApp Image 2023-03-14 at 7 59 27 PM](https://user-images.githubusercontent.com/68791488/225125058-17cb0214-6759-44b2-8d35-4aa922aab3c1.jpeg)
+
+
+<br/>
+<hr/>
+<br/>
+
 
 ## Contributing
 
@@ -169,6 +240,7 @@ Contributions are welcome! Please follow these steps:
 <br/>
 <hr/>
 <br/>
+
 ## Developers
 
 <table align="center">
