@@ -8,9 +8,9 @@ using namespace cv;
 #include "region_growing.h"
 #include "spectral_thresholding.h"
 #include "otsu_thresholding.h"
-
+#include "kmean.h"
 int main() {
-    Mat image = imread("03.jfif");
+    Mat image = imread("02.jfif");
     if (image.empty()) {
         cout << "Error: Could not read image file." << endl;
         return -1;
@@ -18,7 +18,7 @@ int main() {
         imshow("Original Image", image);
     }
 
-    int option=0;
+    int option=4;
     Mat output;
     if(option==0){
 
@@ -40,6 +40,10 @@ int main() {
         otsu_thresholding().apply(image, output);
         imshow("Otsu Thresholding",output);
 
+    }else if(option==4){
+        //    kMeansMainFunction(image,16);
+        kmean().apply(image, output, 16);
+        imshow("K-mean",output);
     }
 
 
