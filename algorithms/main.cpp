@@ -19,7 +19,7 @@ int main() {
         imshow("Original Image", image);
     }
 
-    int option=5;
+    int option=4;
     Mat output;
 
     if(option==0){
@@ -43,10 +43,10 @@ int main() {
         imshow("Otsu Thresholding",output);
 
     }else if(option==4){
-        kmean().apply(image, output, 16);
+        kmean().apply(image, output, 3);
         imshow("K-mean",output);
     }else if(option==5){
-        mean_shift().apply(image, output, 30);
+        mean_shift().apply(image, output, 100);
         imshow("Mean Shift",output);
     }
 

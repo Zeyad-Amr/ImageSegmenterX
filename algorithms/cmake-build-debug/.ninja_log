@@ -12,3 +12,11 @@
 14	4837	7048504532349262	CMakeFiles/algorithms.dir/kmean.cpp.obj	d81b49bfdada2a1a
 20	4847	7048504532449005	CMakeFiles/algorithms.dir/mean_shift.cpp.obj	e53e97f46106ac9b
 4848	5432	7048504538261871	algorithms.exe	be66a6229bbca018
+9	8318	7048505663758118	CMakeFiles/algorithms.dir/main.cpp.obj	9a36644d375a8ae9
+8319	9502	7048505674859185	algorithms.exe	be66a6229bbca018
+5	3193	7048506093789573	CMakeFiles/algorithms.dir/main.cpp.obj	9a36644d375a8ae9
+3194	3761	7048506099406548	algorithms.exe	be66a6229bbca018
+7	2966	7048506588059783	CMakeFiles/algorithms.dir/main.cpp.obj	9a36644d375a8ae9
+2966	3532	7048506593677626	algorithms.exe	be66a6229bbca018
+6	3309	7048506820234594	CMakeFiles/algorithms.dir/main.cpp.obj	9a36644d375a8ae9
+3310	3927	7048506826353793	algorithms.exe	be66a6229bbca018
