@@ -11,12 +11,14 @@ CONFIG += c++17
 SOURCES += \
     garbage.cpp \
     k-means.cpp \
+    localthreshold.cpp \
     main.cpp \
     mainwindow.cpp \
     mean-shift.cpp
 
 HEADERS += \
     k-means.h \
+    localthreshold.h \
     mainwindow.h \
     mean-shift.h
 
