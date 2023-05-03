@@ -14,7 +14,7 @@ using namespace std;
 using namespace cv;
 
 class kmean {
-private:
+public:
     static vector<int> find_closest_centroids(vector<vector<double>> X, vector<vector<double>> centroids);
     static vector<vector<double>> compute_centroids(vector<vector<double>> X, vector<int> idx, int K);
     static vector<vector<double>> run_kMeans(vector<vector<double>> X, vector<vector<double>> &initial_centroids,vector<int> &labels, int max_iters=10);
@@ -25,7 +25,6 @@ private:
     static void printCentroids(vector<vector<double>> centroids);
     static void RGBtoLUV(int r, int g, int b, float& l, float& u, float& v);
     static void LUVtoRGB(float l, float u, float v, int& r, int& g, int& b);
-public:
     static void apply(Mat image,Mat& output, int K);
 };
 

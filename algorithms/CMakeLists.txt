@@ -9,6 +9,6 @@ find_package(OpenCV REQUIRED)
 
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-add_executable(algorithms main.cpp optimal_thresholding.cpp optimal_thresholding.h region_growing.cpp region_growing.h spectral_thresholding.cpp spectral_thresholding.h agglomerative.cpp agglomerative.h agglomerative.h otsu_thresholding.cpp otsu_thresholding.h kmean.cpp kmean.h)
+add_executable(algorithms main.cpp optimal_thresholding.cpp optimal_thresholding.h region_growing.cpp region_growing.h spectral_thresholding.cpp spectral_thresholding.h agglomerative.cpp agglomerative.h agglomerative.h otsu_thresholding.cpp otsu_thresholding.h kmean.cpp kmean.h mean_shift.cpp mean_shift.h)
 
 target_link_libraries(algorithms ${OpenCV_LIBS})

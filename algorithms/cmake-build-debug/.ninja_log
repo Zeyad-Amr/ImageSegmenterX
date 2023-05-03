@@ -1,14 +1,14 @@
 # ninja log v5
-1	199	7048491104397602	build.ninja	1805e2850483f07c
+1	199	7048500047543958	build.ninja	1805e2850483f07c
 7	3011	7048487792682040	CMakeFiles/algorithms.dir/region_growing.cpp.obj	7adc154a11dbe092
 20	4820	7048485725029042	CMakeFiles/algorithms.dir/spectral_thresholding.cpp.obj	4931edfeda91aaae
 4666	4763	7048485724485945	CMakeFiles/algorithms.dir/agglomerative.cpp.obj	fe3580291ea10b19
-5	3107	7048487004750183	CMakeFiles/algorithms.dir/main.cpp.obj	9a36644d375a8ae9
-3012	3291	7048487795452950	algorithms.exe	5deab40f59051d19
-6	3378	7048486548673159	CMakeFiles/algorithms.dir/optimal_thresholding.cpp.obj	5d3b0a7d7a08dd4d
-4763	8246	7048485759305158	CMakeFiles/algorithms.dir/otsu_thresholding.cpp.obj	34994981c1edface
-8	3658	7048498893049859	CMakeFiles/algorithms.dir/main.cpp.obj	9a36644d375a8ae9
-16	4044	7048498896904188	CMakeFiles/algorithms.dir/kmean.cpp.obj	d81b49bfdada2a1a
-4045	4494	7048498901366553	algorithms.exe	6c3cb933c89fb874
 8	3238	7048499089025171	CMakeFiles/algorithms.dir/main.cpp.obj	9a36644d375a8ae9
 3239	3666	7048499093280662	algorithms.exe	6c3cb933c89fb874
+6	3378	7048486548673159	CMakeFiles/algorithms.dir/optimal_thresholding.cpp.obj	5d3b0a7d7a08dd4d
+4763	8246	7048485759305158	CMakeFiles/algorithms.dir/otsu_thresholding.cpp.obj	34994981c1edface
+16	4044	7048498896904188	CMakeFiles/algorithms.dir/kmean.cpp.obj	d81b49bfdada2a1a
+7	4328	7048504527267525	CMakeFiles/algorithms.dir/main.cpp.obj	9a36644d375a8ae9
+14	4837	7048504532349262	CMakeFiles/algorithms.dir/kmean.cpp.obj	d81b49bfdada2a1a
+20	4847	7048504532449005	CMakeFiles/algorithms.dir/mean_shift.cpp.obj	e53e97f46106ac9b
+4848	5432	7048504538261871	algorithms.exe	be66a6229bbca018

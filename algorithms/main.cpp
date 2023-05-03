@@ -9,6 +9,7 @@ using namespace cv;
 #include "spectral_thresholding.h"
 #include "otsu_thresholding.h"
 #include "kmean.h"
+#include "mean_shift.h"
 int main() {
     Mat image = imread("02.jfif");
     if (image.empty()) {
@@ -18,8 +19,9 @@ int main() {
         imshow("Original Image", image);
     }
 
-    int option=4;
+    int option=5;
     Mat output;
+
     if(option==0){
 
         region_growing().apply(image, output);
@@ -41,9 +43,11 @@ int main() {
         imshow("Otsu Thresholding",output);
 
     }else if(option==4){
-        //    kMeansMainFunction(image,16);
         kmean().apply(image, output, 16);
         imshow("K-mean",output);
+    }else if(option==5){
+        mean_shift().apply(image, output, 30);
+        imshow("Mean Shift",output);
     }
 
 
