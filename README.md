@@ -1,7 +1,10 @@
 <h1 align="center">
- <strong>Task 4 cv</strong>
- <br/><br/>
+ <strong>ImageSegmenterX</strong>
 </h1>
+
+<h2 align="center">
+ <strong>Powerful Image Thresholding and Segmentation Tool</strong>
+</h2>
 
 ## Table of Contents
 
@@ -37,7 +40,7 @@ Overall, each of these methods has its own advantages and disadvantages, and the
 
 ## How to Use
 
-1. Clone the repository using the command `git clone https://github.com/Computer-Vision-Spring23/a04-16.git`
+1. Clone the repository using the command `git clone https://github.com/Zeyad-Amr/ImageSegmenterX`
 
 
 # Thresholding 
