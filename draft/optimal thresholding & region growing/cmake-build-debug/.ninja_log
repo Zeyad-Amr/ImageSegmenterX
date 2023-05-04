@@ -1,0 +1,11 @@
+# ninja log v5
+14	3640	7048281355175741	CMakeFiles/untitled.dir/optimal_thresholding.cpp.obj	8a6008cecca8c5a6
+8	6368	7048297867631173	CMakeFiles/untitled.dir/main.cpp.obj	64d91ad2b3250fdd
+71	1728	7048301260979606	build.ninja	b9824a130547ec47
+6368	6776	7048297871571362	untitled.exe	2369cf8c3931f7a4
+18	6312	7048297867078914	CMakeFiles/untitled.dir/region_growing.cpp.obj	57d20ccba2daf50f
+4	232	7048301260979606	build.ninja	e8553514d1eb5cc
+14	4292	7048301304826883	CMakeFiles/untitled.dir/region_growing.cpp.obj	b14145fcff2f9298
+5	4312	7048301305038671	CMakeFiles/untitled.dir/optimal_thresholding.cpp.obj	43b6682ee95d29db
+9	4357	7048301305487472	CMakeFiles/untitled.dir/main.cpp.obj	fd91788366b2b550
+4357	4578	7048301307663972	untitled.exe	2369cf8c3931f7a4
