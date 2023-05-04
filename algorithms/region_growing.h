@@ -10,18 +10,17 @@
 #include <opencv2/opencv.hpp>
 using namespace cv;
 
-class region_growing {
+class region_growing
+{
 private:
     static const int THRESHOLD = 50; // Threshold for region growing
-    static void region_grow_gray(Mat& image, Mat& result, int x, int y);
-    static void region_grow_color(Mat& image, Mat& result, int x, int y);
-public:
+    static void region_grow_gray(Mat &image, Mat &result, int x, int y);
+    static void region_grow_color(Mat &image, Mat &result, int x, int y);
 
+public:
     region_growing();
 
-   static void apply(Mat image, Mat& output);
-
+    static void apply(Mat image, Mat &output);
 };
 
-
-#endif //UNTITLED_REGION_GROWING_H
+#endif // UNTITLED_REGION_GROWING_H

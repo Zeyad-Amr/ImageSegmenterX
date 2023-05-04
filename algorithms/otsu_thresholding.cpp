@@ -6,7 +6,7 @@
 
 otsu_thresholding::otsu_thresholding() {}
 
-void otsu_thresholding::apply(Mat inputImg, Mat& output)
+void otsu_thresholding::apply(Mat inputImg, Mat &output)
 {
     cvtColor(inputImg, inputImg, COLOR_BGR2GRAY);
     int bins_num = 256;
@@ -112,7 +112,7 @@ void otsu_thresholding::apply(Mat inputImg, Mat& output)
 
     cout << "Otsu's algorithm implementation thresholding result: " << bin_mids[getmax];
 
-    Mat  dist = inputImg;
+    Mat dist = inputImg;
     for (int y = 0; y < inputImg.rows; y++)
         for (int x = 0; x < inputImg.cols; x++)
             if ((int)inputImg.at<uchar>(y, x) < thrsh)
@@ -123,5 +123,5 @@ void otsu_thresholding::apply(Mat inputImg, Mat& output)
             {
                 dist.at<uchar>(y, x) = 255;
             }
-            output=dist;
+    output = dist;
 }

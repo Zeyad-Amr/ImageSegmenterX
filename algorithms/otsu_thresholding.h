@@ -10,12 +10,11 @@
 using namespace std;
 using namespace cv;
 
-class otsu_thresholding {
+class otsu_thresholding
+{
 public:
     otsu_thresholding();
-    static void apply(Mat inputImg, Mat& output);
-
+    static void apply(Mat inputImg, Mat &output);
 };
 
-
-#endif //UNTITLED_OTSU_THRESHOLDING_H
+#endif // UNTITLED_OTSU_THRESHOLDING_H

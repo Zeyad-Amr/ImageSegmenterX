@@ -18,7 +18,10 @@
 #include "mean_shift.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui
+{
+    class MainWindow;
+}
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -40,7 +43,7 @@ private slots:
 
     QString getFile();
     cv::Mat getMat(QString fileName);
-    QImage convertMatToQimage(cv::Mat imgMat,int flag=0);
+    QImage convertMatToQimage(cv::Mat imgMat, int flag = 0);
     void setLabelImg(QLabel *label, QImage qimage, unsigned int w = 0, unsigned int h = 0);
 
     void on_optimal_clicked();

@@ -7,18 +7,16 @@
 #include <opencv2/opencv.hpp>
 using namespace cv;
 
-class spectral_thresholding {
+class spectral_thresholding
+{
 
 private:
+  static void computeHistogram(const Mat &image, int histogram[]);
 
-    static void computeHistogram(const Mat& image, int histogram[]);
 public:
-    spectral_thresholding();
+  spectral_thresholding();
 
-  static  void apply(Mat image,Mat& output, int numModes);
-
-
+  static void apply(Mat image, Mat &output, int numModes);
 };
 
-
-#endif //UNTITLED_SPECTRAL_THRESHOLDING_H
+#endif // UNTITLED_SPECTRAL_THRESHOLDING_H

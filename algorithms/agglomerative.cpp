@@ -1,7 +1,3 @@
-//
-// Created by Zeyad on 5/3/2023.
-//
-
 #include "agglomerative.h"
 
 double agglomerative::euclidean_distance(const std::vector<double> &point1, const std::vector<double> &point2)

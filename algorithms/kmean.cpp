@@ -1,10 +1,7 @@
-//
-// Created by Zeyad on 5/3/2023.
-//
-
 #include "kmean.h"
 
-vector<int> kmean::find_closest_centroids(vector<vector<double>> X, vector<vector<double>> centroids) {
+vector<int> kmean::find_closest_centroids(vector<vector<double>> X, vector<vector<double>> centroids)
+{
     // Set K
     int custerNo = centroids.size();
 
@@ -12,21 +9,25 @@ vector<int> kmean::find_closest_centroids(vector<vector<double>> X, vector<vecto
     vector<int> idx(X.size(), 0);
 
     // Loop over each example in X
-    for (int i = 0; i < X.size(); i++) {
+    for (int i = 0; i < X.size(); i++)
+    {
         double min_distance = 1e9;
         int closest_centroid_idx = 0;
 
         // Loop over each centroid
-        for (int j = 0; j < custerNo; j++) {
+        for (int j = 0; j < custerNo; j++)
+        {
             // Compute the Euclidean distance between the example and the centroid
             double distance = 0;
-            for (int k = 0; k < X[i].size(); k++) {
+            for (int k = 0; k < X[i].size(); k++)
+            {
                 distance += pow(X[i][k] - centroids[j][k], 2);
             }
             distance = sqrt(distance);
 
             // Update the closest centroid if the distance is smaller
-            if (distance < min_distance) {
+            if (distance < min_distance)
+            {
                 min_distance = distance;
                 closest_centroid_idx = j;
             }
@@ -39,7 +40,8 @@ vector<int> kmean::find_closest_centroids(vector<vector<double>> X, vector<vecto
     return idx;
 }
 
-vector<vector<double>> kmean::compute_centroids(vector<vector<double>> X, vector<int> idx, int K) {
+vector<vector<double>> kmean::compute_centroids(vector<vector<double>> X, vector<int> idx, int K)
+{
     // Useful variables
     int m = X.size();
     int n = X[0].size();
@@ -50,9 +52,11 @@ vector<vector<double>> kmean::compute_centroids(vector<vector<double>> X, vector
     vector<int> countOfEachCluster(K, 0);
 
     // Loop over each example in X
-    for (int i = 0; i < m; i++) {
+    for (int i = 0; i < m; i++)
+    {
         // Add the example to the sum of its assigned cluster points
-        for (int j = 0; j < n; j++) {
+        for (int j = 0; j < n; j++)
+        {
             sumOfEachClusterPoints[idx[i]][j] += X[i][j];
         }
 
@@ -61,9 +65,12 @@ vector<vector<double>> kmean::compute_centroids(vector<vector<double>> X, vector
     }
 
     // Compute the new centroids
-    for (int i = 0; i < K; i++) {
-        for (int j = 0; j < n; j++) {
-            if (countOfEachCluster[i] > 0) {
+    for (int i = 0; i < K; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (countOfEachCluster[i] > 0)
+            {
                 centroids[i][j] = sumOfEachClusterPoints[i][j] / countOfEachCluster[i];
             }
         }
@@ -71,7 +78,8 @@ vector<vector<double>> kmean::compute_centroids(vector<vector<double>> X, vector
 
     return centroids;
 }
-vector<vector<double>> kmean::run_kMeans(vector<vector<double>> X, vector<vector<double>> &initial_centroids,vector<int> &labels, int max_iters) {
+vector<vector<double>> kmean::run_kMeans(vector<vector<double>> X, vector<vector<double>> &initial_centroids, vector<int> &labels, int max_iters)
+{
     // Initialize values
     int m = X.size();
     int K = initial_centroids.size();
@@ -80,7 +88,8 @@ vector<vector<double>> kmean::run_kMeans(vector<vector<double>> X, vector<vector
     labels = vector<int>(m, 0);
 
     // Run K-Means
-    for (int i = 0; i < max_iters; i++) {
+    for (int i = 0; i < max_iters; i++)
+    {
         // For each example in X, assign it to the closest centroid
         labels = find_closest_centroids(X, centroids);
 
@@ -93,26 +102,30 @@ vector<vector<double>> kmean::run_kMeans(vector<vector<double>> X, vector<vector
 
     return centroids;
 }
-vector<vector<double>> kmean::kMeans_init_centroids(vector<vector<double>> X, int K) {
+vector<vector<double>> kmean::kMeans_init_centroids(vector<vector<double>> X, int K)
+{
     // Randomly reorder the indices of examples
     std::srand(std::time(nullptr));
     random_shuffle(X.begin(), X.end());
 
     // Take the first K examples as centroids
     vector<vector<double>> centroids(K, vector<double>(X[0].size(), 0));
-    for (int i = 0; i < K; i++) {
+    for (int i = 0; i < K; i++)
+    {
         centroids[i] = X[i];
     }
 
     return centroids;
 }
-void kmean::assignToClusters(vector<vector<double>> &vec,vector<int> labels,vector<vector<double>> centroids){
-    for(int i=0;i<(int)vec.size();i++){
+void kmean::assignToClusters(vector<vector<double>> &vec, vector<int> labels, vector<vector<double>> centroids)
+{
+    for (int i = 0; i < (int)vec.size(); i++)
+    {
         vector<double> centroid = centroids[labels[i]];
 
-        //convert the luv center to rgb
-        int r,g,b;
-        LUVtoRGB(centroid[0],centroid[1],centroid[2],r,g,b);
+        // convert the luv center to rgb
+        int r, g, b;
+        LUVtoRGB(centroid[0], centroid[1], centroid[2], r, g, b);
         vector<double> rgb;
         rgb.push_back(r);
         rgb.push_back(g);
@@ -120,23 +133,25 @@ void kmean::assignToClusters(vector<vector<double>> &vec,vector<int> labels,vect
         vec[i] = rgb;
     }
 }
-vector<vector<double>> kmean::convertMatToVector(cv::Mat image){
+vector<vector<double>> kmean::convertMatToVector(cv::Mat image)
+{
     vector<vector<double>> imageVector;
-    for (int i = 0; i < image.rows; i++) {
-        for (int j = 0; j < image.cols; j++) {
+    for (int i = 0; i < image.rows; i++)
+    {
+        for (int j = 0; j < image.cols; j++)
+        {
             cv::Vec3b pixel = image.at<cv::Vec3b>(i, j);
             vector<double> pixelColor;
-            for(int k = 0;k<3;k++)
+            for (int k = 0; k < 3; k++)
                 pixelColor.push_back(pixel[k]);
 
-            //convert rgb to luv
-            float l,u,v;
-            RGBtoLUV((int)pixelColor[0],(int)pixelColor[1],(int)pixelColor[2],l,u,v);
+            // convert rgb to luv
+            float l, u, v;
+            RGBtoLUV((int)pixelColor[0], (int)pixelColor[1], (int)pixelColor[2], l, u, v);
             pixelColor.clear();
             pixelColor.push_back(l);
             pixelColor.push_back(u);
             pixelColor.push_back(v);
-
 
             imageVector.push_back(pixelColor);
         }
@@ -144,34 +159,40 @@ vector<vector<double>> kmean::convertMatToVector(cv::Mat image){
     return imageVector;
 }
 
-void kmean::processImageFromDataInVec(cv::Mat &image,vector<vector<double>> vec){
+void kmean::processImageFromDataInVec(cv::Mat &image, vector<vector<double>> vec)
+{
     int rows = image.rows;
     int cols = image.cols;
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
             cv::Vec3b pixel = image.at<cv::Vec3b>(i, j);
             vector<double> pixelColor;
-            for(int k = 0;k<3;k++)
-                pixel[k] = (int)vec[i*cols + j][k];
+            for (int k = 0; k < 3; k++)
+                pixel[k] = (int)vec[i * cols + j][k];
             image.at<cv::Vec3b>(i, j) = pixel;
-
         }
     }
 }
-void kmean::printCentroids(vector<vector<double>> centroids){
+void kmean::printCentroids(vector<vector<double>> centroids)
+{
     int i = 0;
-    for(auto centroid:centroids){
+    for (auto centroid : centroids)
+    {
         i++;
         printf("%d", i);
-        for(auto val:centroid){
-            printf("%f ",val);
+        for (auto val : centroid)
+        {
+            printf("%f ", val);
         }
         printf("\n");
     }
 }
 // Start Converting RGB TO LUV
 
-void kmean::RGBtoLUV(int r, int g, int b, float& l, float& u, float& v) {
+void kmean::RGBtoLUV(int r, int g, int b, float &l, float &u, float &v)
+{
     cv::Mat rgb(1, 1, CV_8UC3, cv::Scalar(b, g, r));
     cv::Mat luv(1, 1, CV_8UC3);
     cv::cvtColor(rgb, luv, cv::COLOR_BGR2Luv);
@@ -181,10 +202,9 @@ void kmean::RGBtoLUV(int r, int g, int b, float& l, float& u, float& v) {
     v = luvPixel[2];
 }
 
-
-
 // Start Converting LUV to RGB
-void kmean::LUVtoRGB(float l, float u, float v, int& r, int& g, int& b) {
+void kmean::LUVtoRGB(float l, float u, float v, int &r, int &g, int &b)
+{
     cv::Mat luv(1, 1, CV_8UC3, cv::Scalar(l, u, v));
     cv::Mat rgb(1, 1, CV_8UC3);
     cv::cvtColor(luv, rgb, cv::COLOR_Luv2BGR);
@@ -194,81 +214,79 @@ void kmean::LUVtoRGB(float l, float u, float v, int& r, int& g, int& b) {
     r = rgbPixel[2];
 }
 
-
-void kmean::apply(Mat image,Mat& output, int K)
+void kmean::apply(Mat image, Mat &output, int K)
 {
     // Check if the image was loaded successfully
-    if (image.empty()) {
+    if (image.empty())
+    {
         cout << "Could not open or find the image";
         return;
     }
 
     vector<vector<double>> imageVector = convertMatToVector(image);
-    vector<vector<double>> centroids = kMeans_init_centroids(imageVector,K);
+    vector<vector<double>> centroids = kMeans_init_centroids(imageVector, K);
 
     printCentroids(centroids);
 
     vector<int> labels;
-    centroids = run_kMeans(imageVector,centroids,labels);
+    centroids = run_kMeans(imageVector, centroids, labels);
 
     printCentroids(centroids);
 
-//    cv::Mat centers_rgb;
-//    cv::cvtColor(centroids, centers_rgb, cv::COLOR_Luv2BGR);
+    //    cv::Mat centers_rgb;
+    //    cv::cvtColor(centroids, centers_rgb, cv::COLOR_Luv2BGR);
 
-
-    assignToClusters(imageVector,labels,centroids);
-    processImageFromDataInVec(image,imageVector);
+    assignToClusters(imageVector, labels, centroids);
+    processImageFromDataInVec(image, imageVector);
 
     printCentroids(centroids);
 
-    output=image;
+    output = image;
 }
 
-
-//void RGBToLUV(int r, int g, int b, float& l, float& u, float& v) {
-//    float x, y, z, u0, v0, L;
-//    float r_linear, g_linear, b_linear;
+// void RGBToLUV(int r, int g, int b, float& l, float& u, float& v) {
+//     float x, y, z, u0, v0, L;
+//     float r_linear, g_linear, b_linear;
 //
-//    // Convert RGB values to linear RGB
-//    float r_srgb = r / 255.0f;
-//    float g_srgb = g / 255.0f;
-//    float b_srgb = b / 255.0f;
-//    if (r_srgb <= 0.04090f) {
-//        r_linear = r_srgb / 12.92f;
-//    } else {
-//        r_linear = powf((r_srgb + 0.055f) / 1.055f, 2.4f);
-//    }
-//    if (g_srgb <= 0.04090f) {
-//        g_linear = g_srgb / 12.92f;
-//    } else {
-//        g_linear = powf((g_srgb + 0.055f) / 1.055f, 2.4f);
-//    }
-//    if (b_srgb <= 0.04090f) {
-//        b_linear = b_srgb / 12.92f;
-//    } else {
-//        b_linear = powf((b_srgb + 0.055f) / 1.055f, 2.4f);
-//    }
+//     // Convert RGB values to linear RGB
+//     float r_srgb = r / 255.0f;
+//     float g_srgb = g / 255.0f;
+//     float b_srgb = b / 255.0f;
+//     if (r_srgb <= 0.04090f) {
+//         r_linear = r_srgb / 12.92f;
+//     } else {
+//         r_linear = powf((r_srgb + 0.055f) / 1.055f, 2.4f);
+//     }
+//     if (g_srgb <= 0.04090f) {
+//         g_linear = g_srgb / 12.92f;
+//     } else {
+//         g_linear = powf((g_srgb + 0.055f) / 1.055f, 2.4f);
+//     }
+//     if (b_srgb <= 0.04090f) {
+//         b_linear = b_srgb / 12.92f;
+//     } else {
+//         b_linear = powf((b_srgb + 0.055f) / 1.055f, 2.4f);
+//     }
 //
-//    // Convert linear RGB to XYZ
-//    x = r_linear * 0.4124f + g_linear * 0.3576f + b_linear * 0.1805f;
-//    y = r_linear * 0.2126f + g_linear * 0.7152f + b_linear * 0.0722f;
-//    z = r_linear * 0.0193f + g_linear * 0.1192f + b_linear * 0.9505f;
+//     // Convert linear RGB to XYZ
+//     x = r_linear * 0.4124f + g_linear * 0.3576f + b_linear * 0.1805f;
+//     y = r_linear * 0.2126f + g_linear * 0.7152f + b_linear * 0.0722f;
+//     z = r_linear * 0.0193f + g_linear * 0.1192f + b_linear * 0.9505f;
 //
-//    // Convert XYZ to LUV
-//    u0 = 4.0f * 0.95047f / (0.95047f + 15.0f + 3.0f * 1.08883f);
-//    v0 = 9.0f / (0.95047f + 15.0f + 3.0f * 1.08883f);
-//    L = y > 0.008856f ? 116.0f * powf(y, 1.0f/3.0f) - 16.0f : 903.3f * y;
-//    u = 13.0f * L * (u0 * (4.0f * x / (x + 15.0f + 3.0f * 1.08883f)) - u0);
-//    v = 13.0f * L * (v0 * (9.0f * y / (x + 15.0f + 3.0f * 1.08883f)) - v0);
+//     // Convert XYZ to LUV
+//     u0 = 4.0f * 0.95047f / (0.95047f + 15.0f + 3.0f * 1.08883f);
+//     v0 = 9.0f / (0.95047f + 15.0f + 3.0f * 1.08883f);
+//     L = y > 0.008856f ? 116.0f * powf(y, 1.0f/3.0f) - 16.0f : 903.3f * y;
+//     u = 13.0f * L * (u0 * (4.0f * x / (x + 15.0f + 3.0f * 1.08883f)) - u0);
+//     v = 13.0f * L * (v0 * (9.0f * y / (x + 15.0f + 3.0f * 1.08883f)) - v0);
 //
-//    // Assign LUV values to output parameters
-//    l = L;
-//}
+//     // Assign LUV values to output parameters
+//     l = L;
+// }
 
 // End Converting RGB to LUV
 //
-//void kmean::LUVtoRGB(float l, float u, float v, int& r, int& g, int& b) {
+// void kmean::LUVtoRGB(float l, float u, float v, int& r, int& g, int& b) {
 //    float y, x, z;
 //
 //    // Compute intermediate values

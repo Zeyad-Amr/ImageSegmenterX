@@ -1,7 +1,3 @@
-//
-// Created by Zeyad on 5/3/2023.
-//
-
 #ifndef UNTITLED_AGGLOMERATIVE_H
 #define UNTITLED_AGGLOMERATIVE_H
 
@@ -17,11 +13,10 @@
 using namespace cv;
 using namespace std;
 
-
-
-class agglomerative {
+class agglomerative
+{
 private:
-   static double euclidean_distance(const vector<double> &point1, const vector<double> &point2);
+    static double euclidean_distance(const vector<double> &point1, const vector<double> &point2);
 
     static double clusters_distance(const vector<vector<double>> &cluster1, const vector<vector<double>> &cluster2);
 
@@ -38,13 +33,14 @@ private:
     static Mat segmentation(int k, Mat &img, Mat &resized);
 
 public:
-    static void apply(Mat image, Mat& output){
+    static void apply(Mat image, Mat &output)
+    {
         Mat img;
         Mat resized;
-        agglomerative ag= agglomerative();
-        tie(img, resized) =ag.adjust(image);
+        agglomerative ag = agglomerative();
+        tie(img, resized) = ag.adjust(image);
         output = ag.segmentation(24, img, resized);
     }
 };
 
-#endif //UNTITLED_AGGLOMERATIVE_H
+#endif // UNTITLED_AGGLOMERATIVE_H

@@ -9,17 +9,15 @@
 #include <opencv2/opencv.hpp>
 using namespace cv;
 
-class optimal_thresholding {
+class optimal_thresholding
+{
 private:
-    static int get_optimal_threshold(Mat& image);
-public:
+    static int get_optimal_threshold(Mat &image);
 
+public:
     optimal_thresholding();
 
-
-   static void apply(Mat image, Mat& output) ;
-
+    static void apply(Mat image, Mat &output);
 };
 
-
-#endif //UNTITLED_OPTIMAL_THRESHOLDING_H
+#endif // UNTITLED_OPTIMAL_THRESHOLDING_H
