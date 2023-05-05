@@ -44,7 +44,7 @@ Overall, each of these methods has its own advantages and disadvantages, and the
 
 
 # Thresholding 
-## optimal thresholding 
+## Optimal Thresholding 
 
 Optimal thresholding is a method used in image processing to determine the optimal threshold value for binarizing an image. Binarization involves converting a grayscale image into a binary image, where each pixel is either black or white based on its intensity value compared to a threshold value.
 
@@ -80,7 +80,7 @@ Otsu's method is effective for images with bimodal intensity distributions, wher
 <hr/>
 <br/>
 
-## Spectral thresholding 
+## Spectral Thresholding 
 
 Spectral thresholding is a method used in image processing and computer vision to segment an image into different regions based on the spectral characteristics of the image. In particular, it involves using the spectral properties of an image to identify areas of interest and separate them from the background.
 
@@ -124,7 +124,7 @@ Spectral thresholding can be useful for segmenting images in applications such a
 <hr/>
 <br/>
 
-## Local thresholding 
+## Local Thresholding 
 Local thresholding is a method used in image processing and computer vision to segment an image into different regions based on the local properties of the image. In particular, it involves using a different threshold value for each pixel or local neighborhood of pixels based on their local intensity characteristics.
 
 Local thresholding is often used when the global thresholding methods, such as Otsu's method or spectral thresholding, fail to provide satisfactory results. This is often the case when the image has non-uniform illumination or when the foreground and background regions have different contrast levels.
@@ -146,7 +146,7 @@ Local thresholding can be useful for segmenting images in applications such as d
 <br/>
 
 # Segmentation
-## k-means 
+## K-means 
 
 Segmentation using k-means is a method used in image processing and computer vision to segment an image into different regions based on the similarity of their color or intensity values. It involves clustering the pixels in an image into k clusters based on their color or intensity values and then assigning each pixel to the cluster with the closest color or intensity value.
 
@@ -170,7 +170,7 @@ Segmentation using k-means can be effective for images with distinct regions or 
 <hr/>
 <br/>
 
-##  region growing 
+##  Region Growing 
 Segmentation using region growing is a method used in image processing and computer vision to segment an image into different regions based on the similarity of neighboring pixels. It involves grouping together adjacent pixels that have similar characteristics, such as color or intensity, to form a region.
 
 The region growing algorithm starts with an initial seed pixel or set of seed pixels that belong to a particular region. The algorithm then iteratively adds neighboring pixels to the region if they meet certain criteria, such as having similar color or intensity values. The process continues until no more pixels can be added to the region or a stopping criterion is reached.
@@ -220,7 +220,7 @@ Segmentation using agglomerative clustering can be effective for images with dis
 <hr/>
 <br/>
 
-##  Mean shift 
+##  Mean Shift 
 Segmentation using mean shift is a method used in image processing and computer vision to segment an image into different regions based on the similarity of neighboring pixels. It involves shifting a window over the image and iteratively updating the position of the window center to the mean of the pixels within the window until convergence is reached.
 
 The mean shift algorithm starts with a window centered at a pixel of interest. The algorithm then computes the mean color or intensity values of the pixels within the window and shifts the window center to the location of the mean. This process is repeated until convergence is reached, which occurs when the window center no longer moves or moves by less than a specified threshold.
